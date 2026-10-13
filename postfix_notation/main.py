@@ -21,64 +21,33 @@ def div(stack: list):
     stack.append(a / b)
 
 def special(stack: list):
-    a = stack[len(stack)-1]
-    b = stack[len(stack)-2]
+    a = stack.pop()
+    b = stack.pop()
     if a != 0 and b != 0:
-        stack.pop()
-        stack.pop()
         stack.append(abs(a - b))
     else:
-        s = sum(stack)
+        s = sum(stack) + a + b
         stack.append(s ** 2)
 
-def validate_expression(elements: list, opers: dict) -> tuple[bool, str]:
 
-    stack_size = 0
-    for i, e in enumerate(elements, start=1):
-        if e in opers:
-            # Бинарные операторы требуют минимум 2 операнда на стеке
-            if e == "~":
-                if stack_size < 2:
-                    return False, (f"Ошибка на позиции {i} ('{e}'): "
-                                   f"для оператора '~' нужно минимум 2 операнда, "
-                                   f"на стеке только {stack_size}")
-            else:
-                if stack_size < 2:
-                    return False, (f"Ошибка на позиции {i} ('{e}'): "
-                                   f"для оператора '{e}' нужно минимум 2 операнда, "
-                                   f"на стеке только {stack_size}")
-            stack_size -= 1  # два операнда -> один результат
-        else:
-            try:
-                float(e)
-                stack_size += 1
-            except ValueError:
-                return False, (f"Ошибка на позиции {i} ('{e}'): "
-                               f"не является числом и не является оператором")
-    if stack_size != 1:
-        return False, (f"Некорректное выражение: в конце на стеке должно "
-                       f"остаться 1 значение, а осталось {stack_size}")
-    return True, ""
-
-def posfix_calculation(inp: str):
-    elements = inp.split()
+def posfix_calculation(expr: str):
+    elements = expr.split()
 
     if not elements:
-        raise ValueError("Пустое выражение")
-
+        raise ValueError("Empty expression")
+    
     opers = {"+": add, "-": sub, "*": mult, "/": div, "~": special}
-
-    # Проверка корректности ДО вычислений
-    ok, err = validate_expression(elements, opers)
-    if not ok:
-        raise ValueError(err)
-
     stack = []
     count = 0
     for e in elements:
         if opers.get(e) is None:
-            stack.append(float(e))
+            try:
+                stack.append(float(e))
+            except ValueError:
+                raise ValueError("Invalid expression: not a number")
         else:
+            if len(stack) < 2:
+                raise ValueError("Not enough operands for operator")
             opers[e](stack)
         count += 1
         print(f"Stack state({count}): {stack}")
@@ -94,5 +63,3 @@ if __name__ == "__main__":
         print(f"Error: {e}")
     except ZeroDivisionError:
         print("Error: zero division")
-    except IndexError:
-        print("Error: not enough operands")

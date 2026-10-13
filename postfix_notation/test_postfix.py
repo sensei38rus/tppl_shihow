@@ -24,12 +24,16 @@ def test_div():
 def test_special_zero():
     stack = [2,3,0]
     main.special(stack)
-    assert([2,3,0,25] == stack)
+    assert([2,25] == stack)
 
 def test_special_not_zero():
     stack = [1,2,3]
     main.special(stack)
     assert([1,1] == stack)
+
+    stack2 = [1,3,2]
+    main.special(stack2)
+    assert([1,1] == stack2)
 
 def test_simple_expression():
     exp1 = "3 4 +"
@@ -106,3 +110,11 @@ def test_special_expression():
     exp5 = "10 4 ~ 10 4 ~ +"
     assert(12 == main.posfix_calculation(exp5))
 
+    exp6 = "10 4 ~ 10 4 ~ *"
+    assert(36 == main.posfix_calculation(exp6))
+
+    exp7 = "1 2 ~ 3 4 ~ ~"
+    assert(0 == main.posfix_calculation(exp7))
+
+    exp8 = "100 30 ~ 20 5 ~ -"
+    assert(55 == main.posfix_calculation(exp8))
