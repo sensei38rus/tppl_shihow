@@ -3,36 +3,50 @@ import main
 
 def test_add():
     stack = [1,2,3]
-    main.add(stack)
+    b = stack.pop()
+    a = stack.pop()
+    main.add(a,b,stack)
     assert([1,5] == stack)
 
 def test_sub():
     stack = [1,2,3]
-    main.sub(stack)
+    b = stack.pop()
+    a = stack.pop()
+    main.sub(a,b,stack)
     assert([1,-1] == stack)
 
 def test_mult():
     stack = [1,2,3]
-    main.mult(stack)
+    b = stack.pop()
+    a = stack.pop()
+    main.mult(a,b,stack)
     assert([1,6] == stack)
 
 def test_div():
     stack = [1,6,2]
-    main.div(stack)
+    b = stack.pop()
+    a = stack.pop()
+    main.div(a,b,stack)
     assert([1,3] == stack)
 
 def test_special_zero():
     stack = [2,3,0]
-    main.special(stack)
+    b = stack.pop()
+    a = stack.pop()
+    main.special(a,b,stack)
     assert([2,25] == stack)
 
 def test_special_not_zero():
     stack = [1,2,3]
-    main.special(stack)
+    b = stack.pop()
+    a = stack.pop()
+    main.special(a,b,stack)
     assert([1,1] == stack)
 
     stack2 = [1,3,2]
-    main.special(stack2)
+    b = stack2.pop()
+    a = stack2.pop()
+    main.special(a,b,stack2)
     assert([1,1] == stack2)
 
 def test_simple_expression():

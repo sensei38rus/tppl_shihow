@@ -1,28 +1,18 @@
-def add(stack: list):
-    b = stack.pop()
-    a = stack.pop()
+def add(a,b, stack: list):
     stack.append(a + b)
 
-def sub(stack: list):
-    b = stack.pop()
-    a = stack.pop()
+def sub(a,b,stack: list):
     stack.append(a - b)
 
-def mult(stack: list):
-    b = stack.pop()
-    a = stack.pop()
+def mult(a,b,stack: list):
     stack.append(a * b)
 
-def div(stack: list):
-    b = stack.pop()
-    a = stack.pop()
+def div(a,b,stack: list):
     if b == 0:
         raise ZeroDivisionError
     stack.append(a / b)
 
-def special(stack: list):
-    a = stack.pop()
-    b = stack.pop()
+def special(a,b,stack: list):
     if a != 0 and b != 0:
         stack.append(abs(a - b))
     else:
@@ -48,7 +38,9 @@ def posfix_calculation(expr: str):
         else:
             if len(stack) < 2:
                 raise ValueError("Not enough operands for operator")
-            opers[e](stack)
+            b = stack.pop()
+            a = stack.pop()
+            opers[e](a,b,stack)
         count += 1
         print(f"Stack state({count}): {stack}")
 
