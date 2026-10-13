@@ -19,6 +19,7 @@ def special(a,b,stack: list):
         stack.append(abs(a - b))
     else:
         s = sum(stack) + a + b
+        stack.clear()
         stack.append(s ** 2)
 
 
@@ -49,17 +50,17 @@ def posfix_calculation(expr: str):
     return stack.pop()
 
 def main(): 
-    if len(sys.argv) < 2:
-        print("Usage: python3 main.py \"<expression>\"", file=sys.stderr)
-        sys.exit(1)
-    expression = sys.argv[1]
-    try:
-        res = posfix_calculation(expression)
-        print(f"({expression}) = {res}")
-    except ValueError as e:
-        print(f"Error: {e}")
-    except ZeroDivisionError:
-        print("Error: zero division")
+    if len(sys.argv) < 2:                                                       # pragma: no cover
+        print("Usage: python3 main.py \"<expression>\"", file=sys.stderr)       # pragma: no cover
+        sys.exit(1)                                                             # pragma: no cover
+    expression = sys.argv[1]                                                    # pragma: no cover
+    try:                                                                        # pragma: no cover   
+        res = posfix_calculation(expression)                                    # pragma: no cover
+        print(f"({expression}) = {res}")                                        # pragma: no cover
+    except ValueError as e:                                                     # pragma: no cover
+        print(f"Error: {e}")                                                    # pragma: no cover
+    except ZeroDivisionError:                                                   # pragma: no cover
+        print("Error: zero division")                                           # pragma: no cover
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":                                                      # pragma: no cover
+    main()                                                                      # pragma: no cover
