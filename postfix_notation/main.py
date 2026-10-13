@@ -1,3 +1,5 @@
+import sys
+
 def add(a,b, stack: list):
     stack.append(a + b)
 
@@ -46,8 +48,11 @@ def posfix_calculation(expr: str):
 
     return stack.pop()
 
-if __name__ == "__main__":
-    expression = input("Enter the expression: ")
+def main(): 
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py \"<expression>\"", file=sys.stderr)
+        sys.exit(1)
+    expression = sys.argv[1]
     try:
         res = posfix_calculation(expression)
         print(f"({expression}) = {res}")
@@ -55,3 +60,6 @@ if __name__ == "__main__":
         print(f"Error: {e}")
     except ZeroDivisionError:
         print("Error: zero division")
+
+if __name__ == "__main__":
+    main()
