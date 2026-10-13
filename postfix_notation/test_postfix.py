@@ -37,17 +37,20 @@ def test_special_zero():
     assert([2,25] == stack)
 
 def test_special_not_zero():
-    stack = [1,2,3]
+    stack = [2,3]
     b = stack.pop()
     a = stack.pop()
     main.special(a,b,stack)
-    assert([1,1] == stack)
-
-    stack2 = [1,3,2]
+   
+    stack2 = [3,2]
     b = stack2.pop()
     a = stack2.pop()
     main.special(a,b,stack2)
-    assert([1,1] == stack2)
+    
+    assert(stack == stack2 == [1])
+
+    
+
 
 def test_simple_expression():
     exp1 = "3 4 +"
