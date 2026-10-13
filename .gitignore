@@ -1,3 +1,5 @@
 *.o
 /.vscode
 /average/average
+*/__pycache__
+*/.pytest_cache
