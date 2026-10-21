@@ -52,7 +52,10 @@ def posfix_calculation(expr: str):
 def main(): 
     if len(sys.argv) < 2:                                                       # pragma: no cover
         print("Usage: python3 main.py \"<expression>\"", file=sys.stderr)       # pragma: no cover
-        sys.exit(1)                                                             # pragma: no cover
+        sys.exit(1)
+    if len(sys.argv) > 2:
+        print("Expression needs to be in qoutes: \"2 3 + \" ")  
+        sys.exit(1)                                                           # pragma: no cover
     expression = sys.argv[1]                                                    # pragma: no cover
     try:                                                                        # pragma: no cover   
         res = posfix_calculation(expression)                                    # pragma: no cover
