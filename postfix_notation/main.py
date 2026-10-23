@@ -23,13 +23,16 @@ def special(a,b,stack: list):
         stack.append(s ** 2)
 
 
+def pow(a,b, stack:list):
+	stack.append(a**b)
+
 def posfix_calculation(expr: str):
     elements = expr.split()
 
     if not elements:
         raise ValueError("Empty expression")
     
-    opers = {"+": add, "-": sub, "*": mult, "/": div, "~": special}
+    opers = {"+": add, "-": sub, "*": mult, "/": div, "~": special, "!":pow}
     stack = []
     count = 0
     for e in elements:
