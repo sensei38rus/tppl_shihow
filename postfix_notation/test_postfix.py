@@ -29,6 +29,13 @@ def test_div():
     main.div(a,b,stack)
     assert [1,3] == stack 
 
+def test_pow():
+    stack = [2,5]
+    b = stack.pop()
+    a = stack.pop()
+    main.pow(a,b,stack)
+    assert [32] == stack
+
 def test_special_zero():
     stack = [2,3,0]
     b = stack.pop()
@@ -152,5 +159,14 @@ def test_few_operands():
     with pytest.raises(ValueError):
             main.posfix_calculation(exp3)
 
+def test_pow_expression():
+    exp1 = "5 2 !"
+    assert 25 == main.posfix_calculation(exp1)
+
+    exp2 = "25 0.5 !"
+    assert 5 == main.posfix_calculation(exp2)
+
+    exp3 = "10 -2 !"
+    assert 0.01 == main.posfix_calculation(exp3)
 
 
