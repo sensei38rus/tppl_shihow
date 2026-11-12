@@ -119,3 +119,7 @@ def test_tokenizer_ident():
 def test_tokenizer_invalid():
     with pytest.raises(Lexical):
         tokenizer("invalid t@xt")
+
+def test_tokenizer_comments():
+    res = tokenizer("x # some comment")
+    assert res == ["(IDENT, x, 1:1)"]
