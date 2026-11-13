@@ -1,16 +1,16 @@
 import sys
 import os
+from enum import Enum,auto
 
-
-class Type:
-    IDENT = "IDENT"
-    KEYWORD = "KEYWORD"
-    INT = "INT"
-    FLOAT = "FLOAT"
-    STRING = "STRING"
-    OP = "OP"
-    SEP = "SEP"
-    UNDEF = "UNDEF"
+class Type(Enum):
+    IDENT = auto()
+    KEYWORD = auto()
+    INT = auto()
+    FLOAT = auto()
+    STRING = auto()
+    OP = auto()
+    SEP = auto()
+    UNDEF = auto()
 
 
 class Lexical(Exception):
@@ -62,7 +62,7 @@ def is_ident(word: str) -> bool:
     return all(c.isalnum() or c == '_' for c in word)
 
 
-def define(word: str) -> str:
+def define(word: str) -> Type:
     if is_keyword(word):
         return Type.KEYWORD
     elif is_operator(word):
@@ -96,7 +96,7 @@ def tokenizer(text: str) -> list:
                     if what == Type.UNDEF:
                         raise Lexical(f"unexpected token {word!r}", i+1, j-len(word)+1)
                     
-                    res.append(f"({what}, {word}, {i+1}:{j - len(word) + 1})")
+                    res.append(f"({what.name}, {word}, {i+1}:{j - len(word) + 1})")
                     word = ""
             else:
                 word += chr_
@@ -104,7 +104,7 @@ def tokenizer(text: str) -> list:
             what = define(word)
             if what == Type.UNDEF:
                 raise Lexical(f"unexpected token {word!r}", i+1, len(line) - len(word)+1)
-            res.append(f"({what}, {word}, {i+1}:{len(line) - len(word) + 1})")
+            res.append(f"({what.name}, {word}, {i+1}:{len(line) - len(word) + 1})")
     return res
 
 
